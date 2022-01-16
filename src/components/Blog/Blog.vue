@@ -1,21 +1,37 @@
 <template>
-  <el-rows :gutter="20">
-    <el-col :span="16">
-      <article-list></article-list>
-    </el-col>
+  <div class="container">
+    <el-row :gutter="20" type="flex">
+      <el-col :span="18" :xs="24" >
+        <article-list></article-list>
+      </el-col>
 
-    <el-col :span="8"> <div>hha</div> </el-col>
-  </el-rows>
+      <el-col :span="6" :xs="24" class="right-col"> 
+        <right-menu />
+      </el-col>
+    </el-row>
+  </div>
 </template>
 
 <script>
-import ArticleList from './ArticleList.vue';
+import ArticleList from "./ArticleList.vue";
+import rightMenu from "../RightMenu/RightMenu.vue"
 export default {
-  components: { ArticleList },
+  components: { ArticleList, rightMenu },
   name: "Blog",
-  
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "@/assets/css/_container.scss";
+
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.right-col{
+  width: 100%;
+}
 </style>
