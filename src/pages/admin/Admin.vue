@@ -11,7 +11,7 @@
 
       <!-- 右侧显示内容栏 -->
       <el-main height="">
-        <admin-tabs> </admin-tabs>
+        <admin-tabs id="contextmenu"> </admin-tabs>
         <!-- Main content -->
         <!-- 实现缓存 -->
         <!-- <router-view v-slot="{ Component }">
@@ -21,7 +21,7 @@
         </router-view> -->
         <router-view v-slot="{ Component }">
           <keep-alive :include="cacheTabList">
-            <component :is="Component" :key="$route.name" />
+            <component :is="Component" v-if="reload" :key="$route.name" />
           </keep-alive>
         </router-view>
       </el-main>
@@ -50,6 +50,7 @@ export default {
     ...mapState({
       isCollapse: (state) => state.admin.isCollapse,
       cacheTabList: (state) => state.admin.cacheTabList,
+      reload: (state) => state.admin.reload,
     }),
   },
   methods: {},

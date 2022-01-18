@@ -1,4 +1,5 @@
 import router from '@/router';
+import { nextTick } from 'vue';
 
 const admin = {
     state: {
@@ -15,6 +16,7 @@ const admin = {
             },
         ],
         cacheTabList: ['adminHome'],
+        reload: true,
 
     },
 
@@ -39,7 +41,7 @@ const admin = {
         // 添加新的标签页
         ADD_TAB(state, to) {
             let temp = localStorage.getItem('activeTabs');
-            if(temp){
+            if (temp) {
                 state.tabs = JSON.parse(temp);
             }
             let some = state.tabs.some(it => it.name == to.name);
@@ -58,7 +60,7 @@ const admin = {
         // 删除标签页
         REMOVE_TAB(state, name) {
             let temp = localStorage.getItem('activeTabs');
-            if(temp){
+            if (temp) {
                 state.tabs = JSON.parse(temp);
             }
             let index = state.tabs.findIndex(it => it.name == name);
@@ -72,14 +74,14 @@ const admin = {
             }
 
             temp = localStorage.getItem('cacheTabList');
-            if(temp){
+            if (temp) {
                 state.cacheTabList = JSON.parse(temp);
             }
 
             index = state.cacheTabList.findIndex(item => item == name);
             console.log("删除CacheList = ", index, name, state.cacheTabList);
-            if(index > 0){
-                console.log("删除CacheList = ", index,  name,  state.cacheTabList);
+            if (index > 0) {
+                console.log("删除CacheList = ", index, name, state.cacheTabList);
                 state.cacheTabList.splice(index, 1);
             }
 
@@ -105,6 +107,123 @@ const admin = {
             }
 
             localStorage.setItem('cacheTabList', JSON.stringify(state.cacheTabList))
+        },
+
+        // 删除右侧的标签
+        REMOVE_RIGHT_TAB(state, routeName) {
+
+            // console.log("关闭右侧标签");
+            this.commit('getCacheActiveTabs');
+            this.commit('getcacheTabList')
+            
+
+            // 修改打开的标签页栏
+            let index = state.cacheTabList.findIndex(item => item === routeName);
+            if(index > 0){
+                state.cacheTabList = state.cacheTabList.slice(0, index+1);
+            }   
+            
+            // 修改缓存的标签页
+            index = state.tabs.findIndex(item => item.name === routeName);
+            if(index > 0){
+                state.tabs = state.tabs.slice(0, index + 1);
+            }
+
+            // 更新当前活动标签页
+            if(state.activeTab != routeName){
+                router.push({name: routeName})
+            }
+
+            this.commit('setCacheActiveTabs')
+            this.commit('setCacheTabList')
+
+        },
+
+        // 删除其他标签
+        REMOVE_OTHER_TAB(state, routeName){
+            this.commit('getCacheActiveTabs');
+            this.commit('getcacheTabList')
+            
+            state.cacheTabList = state.cacheTabList.filter(item => item==='adminHome' || item===routeName);
+            state.tabs = state.tabs.filter(item => item.name==='adminHome' || item.name===routeName);
+            
+            if(state.activeTab != routeName){
+                router.push({name: routeName})
+            }
+
+            this.commit('setCacheActiveTabs')
+            this.commit('setCacheTabList')
+        },
+
+        // 删除全部标签
+        REMOVE_ALL_TAB(state){
+            this.commit('getCacheActiveTabs');
+            this.commit('getcacheTabList')
+            
+            
+            state.cacheTabList = state.cacheTabList.filter(item => item==='adminHome' );
+            state.tabs = state.tabs.filter(item => item.name==='adminHome');
+            
+            if(state.activeTab != state.cacheTabList[0]){
+                router.push({name: state.cacheTabList[0]})
+            }
+
+            this.commit('setCacheActiveTabs')
+            this.commit('setCacheTabList')
+        },
+
+        // 删除缓存的tab页
+        REMOVE_CACHE_TAB(state, routName){
+            this.commit('getcacheTabList')
+            let index = state.cacheTabList.findIndex(item => item === routName);
+            if(index > 0){
+                state.cacheTabList.splice(index, 1);
+                this.commit('setCacheTabList')
+            }
+            
+        },
+
+        // 设置reload的属性
+        SET_RELOAD(state, value){
+            state.reload = value;
+        },
+
+        // 刷新
+        RELOAD(state){
+            let tab = state.activeTab;
+            let index = state.cacheTabList.findIndex(item => item === tab);
+            if(index > 0){
+                state.cacheTabList.splice(index, 1);
+            }
+
+            nextTick(() => {
+                state.cacheTabList.push(tab);
+                router.push({name: tab})
+            })
+        },
+
+        // 获取缓存的CacheTabList
+        getcacheTabList(state) {
+            let temp = localStorage.getItem('cacheTabList');
+            if (temp) {
+                state.cacheTabList = JSON.parse(temp);
+            }
+        },
+        // 设置缓存的cacheTabList
+        setCacheTabList(state){
+            localStorage.setItem('cacheTabList', JSON.stringify(state.cacheTabList))
+        },
+
+        // 获取缓存的tabs
+        getCacheActiveTabs(state) {
+            let temp = localStorage.getItem('activeTabs');
+            if (temp) {
+                state.tabs = JSON.parse(temp);
+            }
+        },
+        // 设置缓存的tabs
+        setCacheActiveTabs(state){
+            localStorage.setItem('activeTabs', JSON.stringify(state.tabs));
         }
 
     }
