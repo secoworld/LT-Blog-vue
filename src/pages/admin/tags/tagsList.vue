@@ -1,15 +1,16 @@
 <template>
     <div>
-        <p>hello world</p>
+        tag 页面
     </div>
 </template>
 
 <script>
 export default {
-    name: 'Article'
+    name: 'tagsList'
 }
 </script>
 
-<style lang='sass' scoped>
+<style lang="scss" scoped>
 
-</style>
+</style>>
+

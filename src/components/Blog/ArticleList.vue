@@ -1,14 +1,18 @@
 <template>
   <div id="articles">
-    <ArticleCard  v-for="art in articles" :key="art.id" :article="art"></ArticleCard>
+    <ArticleCard
+      v-for="art in articles"
+      :key="art.id"
+      :article="art"
+    ></ArticleCard>
   </div>
 </template>
 
 <script>
-import ArticleCard from './ArticleCard.vue';
+import ArticleCard from "./ArticleCard.vue";
 export default {
   name: "articleList",
-  components:{
+  components: {
     ArticleCard,
   },
   data() {
@@ -20,6 +24,10 @@ export default {
           content:
             "当一个 Vue 实例被创建时，它将 data 对象返回的所有属性加入到 Vue 的响应式系统中。更神奇的是，当这些属性的值发生改变时，视图将会产生“响应”，即自动更新为新的值。",
           tags: ["vue", "html", "前端"],
+          category: "html",
+          author: 'longtao',
+          time: "2022-01-22 12:22:00",
+          watch: 10,
         },
         {
           id: 2,
@@ -27,6 +35,10 @@ export default {
           content:
             "当一个 Vue 实例被创建时，它将 data 对象返回的所有属性加入到 Vue 的响应式系统中。更神奇的是，当这些属性的值发生改变时，视图将会产生“响应”，即自动更新为新的值。",
           tags: ["vue", "html", "前端"],
+          category: "html",
+          author: 'longtao',
+          time: "2022-01-22 12:22:00",
+          watch: 10,
         },
         {
           id: 3,
@@ -34,6 +46,10 @@ export default {
           content:
             "当一个 Vue 实例被创建时，它将 data 对象返回的所有属性加入到 Vue 的响应式系统中。更神奇的是，当这些属性的值发生改变时，视图将会产生“响应”，即自动更新为新的值。",
           tags: ["vue", "html", "前端"],
+          category: "html",
+          author: 'longtao',
+          time: "2022-01-22 12:22:00",
+          watch: 10,
         },
         {
           id: 4,
@@ -41,6 +57,10 @@ export default {
           content:
             "当一个 Vue 实例被创建时，它将 data 对象返回的所有属性加入到 Vue 的响应式系统中。更神奇的是，当这些属性的值发生改变时，视图将会产生“响应”，即自动更新为新的值。",
           tags: ["vue", "html", "前端"],
+          category: "html",
+          author: 'longtao',
+          time: "2022-01-22 12:22:00",
+          watch: 10,
         },
       ],
     };

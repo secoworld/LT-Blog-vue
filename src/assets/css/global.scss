@@ -1,0 +1,45 @@
+
+$--font-family: Inter,Roboto,Oxygen,Fira Sans,Helvetica Neue,sans-serif;
+$--webkit-font-smoothing: antialiased;
+
+.my-font-family{
+    font-family: $--font-family;
+    -webkit-font-smoothing: $--webkit-font-smoothing;
+}
+
+.displey-flex{
+    display: flex;
+}
+
+.flex-center{
+    justify-content: center;
+}
+
+.flex-wrap{
+    flex-wrap: wrap;
+}
+
+.flex-column{
+    flex-direction: column;
+}
+
+.flex-align-items-center{
+    align-items: center;
+}
+
+.flex-rows-center{
+    display: flex;
+    flex-direction: row;
+    justify-content:  center;
+}
+
+.flex-rows-center-middle{
+    @extend .flex-rows-center;
+    align-items: center;
+}
+
+.flex-column-center{
+    @extend .displey-flex;
+    @extend .flex-column;
+    @extend .flex-align-items-center;
+}
