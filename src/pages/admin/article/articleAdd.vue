@@ -8,7 +8,7 @@
 
 <script>
 export default {
-    name: 'add',
+    name: 'articleAdd',
     data: ()=> {
       return {
         count: 0

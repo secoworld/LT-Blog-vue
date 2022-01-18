@@ -6,36 +6,39 @@
     <el-container>
       <!-- 左侧菜单 -->
       <el-aside :width="isCollapse ? '64px' : '200px'">
-        <admin-menu></admin-menu>
+        <admin-left-menu></admin-left-menu>
       </el-aside>
 
       <!-- 右侧显示内容栏 -->
       <el-main height="">
         <admin-tabs> </admin-tabs>
         <!-- Main content -->
-        <router-view v-slot="{ Component }">
+        <!-- 实现缓存 -->
+        <!-- <router-view v-slot="{ Component }">
             <keep-alive>
-              <component :is="Component" />
+              <component :is="Component" :key="$route.name" />
             </keep-alive>
+        </router-view> -->
+        <router-view v-slot="{ Component }">
+          <keep-alive :include="cacheTabList">
+            <component :is="Component" :key="$route.name" />
+          </keep-alive>
         </router-view>
-
       </el-main>
     </el-container>
   </el-container>
 </template>
 
 <script>
-import AdminHeader from "../../components/Admin/AdminHead.vue";
-import AdminMenu from "../../components/Admin/AdminMenu.vue";
-
 import { mapState } from "vuex";
+import AdminHeader from "../../components/Admin/AdminHead.vue";
+import AdminLeftMenu from "../../components/Admin/AdminLeftMenu.vue";
 import AdminTabs from "../../components/Admin/AdminTabs.vue";
-
 export default {
   name: "admin",
   components: {
     AdminHeader,
-    AdminMenu,
+    AdminLeftMenu,
     AdminTabs,
   },
 
@@ -51,6 +54,8 @@ export default {
   },
   methods: {},
   watch: {},
+  mounted() {
+  },
 };
 </script>
 
@@ -66,5 +71,9 @@ export default {
 .el-header {
   background-color: #000;
   color: #eee;
+}
+
+.el-main {
+  padding: 0px;
 }
 </style>

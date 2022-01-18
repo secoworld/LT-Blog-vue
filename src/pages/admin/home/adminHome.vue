@@ -6,7 +6,7 @@
 
 <script>
 export default {
-    name: 'AdminIndex',
+    name: 'adminHome',
     data:() => {
         return{
 
