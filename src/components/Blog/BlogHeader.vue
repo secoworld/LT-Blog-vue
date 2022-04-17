@@ -29,7 +29,7 @@
          <my-search></my-search>
         </el-col>
       <el-col :span="2">
-          <el-button>登录</el-button>
+          <el-button @click="$router.push('/admin')">登录</el-button>
       </el-col>
     </el-row>
   </div>

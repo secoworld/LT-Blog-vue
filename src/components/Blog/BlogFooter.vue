@@ -1,6 +1,6 @@
 <template>
-  <div class="container" id="footer">
-    <div class="foot-group">
+  <div class="container flex-center" id="footer">
+    <!-- <div class="foot-group">
       <el-row :gutter="20">
         <el-col
           :span="8"
@@ -24,9 +24,9 @@
           </div>
         </el-col>
       </el-row>
-    </div>
+    </div> -->
 
-    <el-divider></el-divider>
+    <!-- <el-divider></el-divider> -->
 
     <!-- 版权声明以及备案 -->
     <div class="copy-right">
@@ -114,6 +114,7 @@ export default {
   /* position: relative; */
   left: 0;
   bottom: 0;
+  min-height: 50px;
   text-align: center;
   font-weight: bold;
   color: #eee;
@@ -161,10 +162,11 @@ export default {
 }
 
 .copy-right {
+  height: 100%;
   display: flex;
   justify-content: center;
-  margin-bottom: 10px;
-  padding-bottom: 10px;
+  // margin-bottom: 10px;
+  // padding-bottom: 10px;
   font-size: 12px;
 
   div {

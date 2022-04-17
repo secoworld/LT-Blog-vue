@@ -40,4 +40,9 @@ export default {
   top: 0px;
   z-index: 100;
 }
+
+.el-footer{
+  height: 40px;
+  width: 100%;
+}
 </style>

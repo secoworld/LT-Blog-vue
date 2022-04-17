@@ -3,17 +3,17 @@
         "baseUrl": ".",
         "paths": {
             "@/*": [
-                "src/*"
+                "src/*",
             ]
         },
         "target": "ES6",
         "module": "commonjs",
-        "allowSyntheticDefaultImports": true
+        "allowSyntheticDefaultImports": true,
     },
     "include": [
-        "src/**/*"
+        "src/**/*",
     ],
     "exclude": [
-        "node_modules"
-    ]
+        "node_modules",
+    ],
 }

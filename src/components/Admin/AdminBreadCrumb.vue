@@ -9,7 +9,7 @@
 
     <template v-for="(item, index) in breadCrumb" :key="index">
       <el-breadcrumb-item :to="{ name: item.name }">
-        {{item.title}}
+        {{ item.title }}
       </el-breadcrumb-item>
     </template>
   </el-breadcrumb>
@@ -26,8 +26,7 @@ export default {
     },
   },
 
-  watch: {
-  },
+  watch: {},
 };
 </script>
 
@@ -39,15 +38,19 @@ export default {
 
 .el-breadcrumb {
   color: white;
-}
 
-.el-breadcrumb-item{
-  cursor: pointer;
-}
+  .el-breadcrumb__item {
+    cursor: pointer;
 
-.el-breadcrumb-item >>> span.el-breadcrumb__inner {
-  font-size: 18px;
-  color: red !important;
+    & ::v-deep span.el-breadcrumb__inner {
+      font-size: 14px;
+      color: #eee;
+
+      &:hover{
+        color: #409eff;
+      }
+    }
+  }
 }
 </style>
 

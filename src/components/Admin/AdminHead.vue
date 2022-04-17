@@ -8,8 +8,23 @@
     </div>
 
     <div class="header-right">
-      <div class="blog-home" @click="goHome">
-        <el-icon :size="30"><HomeFilled /></el-icon>主页
+      <div class="blog-button">
+        <div class="menu-icon">
+          <el-tooltip effect="dark" placement="bottom" content="刷新">
+            <span @click="reloadPage">
+              <!-- <svg-icon name="reload" /> -->
+              <el-icon :size="30"> <RefreshLeft /></el-icon>
+            </span>
+          </el-tooltip>
+        </div>
+
+        <div class="menu-icon">
+          <el-tooltip effect="dark" placement="bottom" content="博客主页">
+            <span @click="goHome">
+              <el-icon :size="30"><HomeFilled /></el-icon>
+            </span>
+          </el-tooltip>
+        </div>
       </div>
 
       <div class="header-img">
@@ -34,6 +49,7 @@
 
 <script>
 import AdminBreadCrumb from "./AdminBreadCrumb.vue";
+import { nextTick } from "vue";
 
 export default {
   name: "AdminHeader",
@@ -43,6 +59,16 @@ export default {
   methods: {
     goHome() {
       this.$router.push("/");
+    },
+
+    reloadPage() {
+      let routeName = this.$route.name;
+      this.$store.commit("SET_RELOAD", false);
+      this.$store.commit("REMOVE_CACHE_TAB", routeName);
+      nextTick(() => {
+        this.$store.commit("SET_RELOAD", true);
+        this.$store.commit("ADD_CACHE_TAB", routeName);
+      });
     },
   },
 };
@@ -60,12 +86,12 @@ export default {
   background-color: #000;
   color: #eee;
 
-  .header-left{
-     @extend .flex-rows-center-middle;
+  .header-left {
+    @extend .flex-rows-center-middle;
 
-     .header-bread{
-       margin-left: 20px;
-     }
+    .header-bread {
+      margin-left: 20px;
+    }
   }
 
   .header-logo {
@@ -80,10 +106,19 @@ export default {
 .header-right {
   @extend .flex-rows-center-middle;
 
-  .blog-home {
+  .blog-button {
     @extend .flex-rows-center-middle;
     margin-right: 20px;
     cursor: pointer;
+
+    .menu-icon{
+      padding-top: 3px;
+      margin-left: 10px;
+
+      &:active{
+        color: #409eff;
+      }
+    }
   }
 
   .header-img .el-dropdown .header-img-dropdwon {
